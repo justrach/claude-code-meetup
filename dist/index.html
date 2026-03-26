@@ -583,11 +583,6 @@ var tx=0;document.addEventListener('touchstart',function(e){tx=e.touches[0].clie
 go(0);
 })();
 </script>
-<script>
-(function(){
-  const es = new EventSource('/_mer/events');
-  es.onmessage = () => location.reload();
-})();
-</script>
+
 </body>
 </html>
