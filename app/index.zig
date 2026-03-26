@@ -114,12 +114,17 @@ const html =
     \\
     \\<!-- 2: About Me -->
     \\<div class="slide">
+    \\<!-- 2: About Me -->
+    \\<div class="slide">
     \\  <h2>About <span class="ac">Me</span></h2>
+    \\  <div style="display:flex;align-items:center;gap:20px;margin-bottom:20px">
+    \\    <img src="https://justrach.com/_next/image?url=%2Favatar.webp&amp;w=64&amp;q=75" style="width:72px;height:72px;border-radius:50%;border:2px solid var(--border)" alt="Rach">
+    \\    <div style="text-align:left"><h3 style="margin-bottom:4px">Rach Pradhan</h3><p style="font-size:13px;text-align:left"><a href="https://x.com/rachpradhan" target="_blank" style="color:var(--accent2);text-decoration:none">@rachpradhan</a></p></div>
+    \\  </div>
     \\  <div class="g2">
     \\    <div class="card">
     \\      <div class="nm">BUILDER</div>
-    \\      <h3>Rach Pradhan</h3>
-    \\      <p>Researcher &amp; serial builder. Creator of <strong>MerJS</strong> (Zig web framework), <strong>TurboAPI</strong> (7x faster FastAPI), and <strong>NanoBrew</strong> (fastest macOS package manager, 3ms installs).</p>
+    \\      <p>Creator of <strong>MerJS</strong> (Zig web framework), <strong>TurboAPI</strong> (7x faster FastAPI), and <strong>NanoBrew</strong> (fastest macOS package manager, 3ms installs).</p>
     \\      <p style="margin-top:8px"><strong>2x exited founder.</strong> <strong>12x hackathon winner</strong> (only 1 non-solo) &mdash; CalHacks, Hack the North, DeepMind, OpenAI &amp; more.</p>
     \\    </div>
     \\    <div class="card">
@@ -423,7 +428,7 @@ const html =
     \\<div class="slide">
     \\  <h2>Find Me on <span class="ac">GitHub</span></h2>
     \\  <div class="gh-card">
-    \\    <div class="gh-avatar">R</div>
+    \\    <img src="https://justrach.com/_next/image?url=%2Favatar.webp&amp;w=64&amp;q=75" style="width:80px;height:80px;border-radius:50%;border:2px solid var(--border);margin:0 auto 16px" alt="Rach">
     \\    <h3>@justrach</h3>
     \\    <p style="text-align:center;margin-bottom:16px">Creator of DevSwarm, MerJS, TurboAPI, NanoBrew &amp; Codegraff</p>
     \\    <div class="flow" style="gap:8px">
