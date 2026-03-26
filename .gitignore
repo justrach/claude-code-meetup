@@ -4,3 +4,4 @@ src/generated/
 tools/
 dist/
 .env
+dist/

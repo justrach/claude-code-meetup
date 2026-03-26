@@ -120,7 +120,7 @@ const html =
     \\      <div class="nm">BUILDER</div>
     \\      <h3>Rach Pradhan</h3>
     \\      <p>Researcher &amp; serial builder. Creator of <strong>MerJS</strong> (Zig web framework), <strong>TurboAPI</strong> (7x faster FastAPI), and <strong>NanoBrew</strong> (fastest macOS package manager, 3ms installs).</p>
-    \\      <p style="margin-top:8px"><strong>2x exited founder.</strong></p>
+    \\      <p style="margin-top:8px"><strong>2x exited founder.</strong> <strong>12x hackathon winner</strong> (only 1 non-solo) &mdash; CalHacks, Hack the North, DeepMind, OpenAI &amp; more.</p>
     \\    </div>
     \\    <div class="card">
     \\      <div class="nm">RESEARCH</div>
