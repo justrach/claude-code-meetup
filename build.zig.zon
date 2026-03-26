@@ -1,0 +1,19 @@
+.{
+    .name = .slides,
+    .fingerprint = 0xb8c020917652e01e,
+    .version = "0.1.0",
+    .minimum_zig_version = "0.15.1",
+    .dependencies = .{
+        .merjs = .{
+            .path = "../../merjs",
+        },
+    },
+    .paths = .{
+        "build.zig",
+        "build.zig.zon",
+        "src",
+        "app",
+        "api",
+        "public",
+    },
+}

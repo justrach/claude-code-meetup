@@ -1,0 +1,591 @@
+const mer = @import("mer");
+
+pub const meta: mer.Meta = .{
+    .title = "AI Agents & DevSwarm \u{2014} Claude Code Community Meetup",
+    .description = "From AI Agents to Multi-Agent Swarms: How Opus 4.6 Changes Everything",
+};
+
+pub fn render(req: mer.Request) mer.Response {
+    _ = req;
+    return mer.html(html);
+}
+
+const html =
+    \\<!DOCTYPE html>
+    \\<html lang="en">
+    \\<head>
+    \\<meta charset="UTF-8">
+    \\<meta name="viewport" content="width=device-width,initial-scale=1.0">
+    \\<title>AI Agents &amp; DevSwarm</title>
+    \\<link rel="preconnect" href="https://fonts.googleapis.com">
+    \\<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    \\<style>
+    \\*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    \\:root{--bg:#fafaf8;--bg2:#f0eeeb;--bg3:#e6e3de;--text:#1a1a2a;--muted:#6b6575;--accent:#c0451e;--accent2:#d4511f;--blue:#2563eb;--green:#16833e;--purple:#7c3aed;--red:#dc2626;--border:#d0c8bc}
+    \\html,body{width:100%;height:100%;overflow:hidden;background:var(--bg)}
+    \\body{font-family:'DM Sans',system-ui,sans-serif;color:var(--text);-webkit-font-smoothing:antialiased}
+    \\a{color:inherit}
+    \\.deck{width:100vw;height:100vh;position:relative;overflow:hidden}
+    \\.slide{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:44px 56px;opacity:0;visibility:hidden;transition:opacity .32s ease,transform .32s ease;transform:translateY(12px) scale(.995);overflow-y:auto}
+    \\.slide.active{opacity:1;visibility:visible;transform:translateY(0) scale(1);z-index:2}
+    \\.slide h1{font-family:'DM Serif Display',Georgia,serif;font-size:clamp(38px,4.8vw,66px);line-height:1.08;letter-spacing:-.03em;text-align:center;margin-bottom:18px}
+    \\.slide h2{font-family:'DM Serif Display',Georgia,serif;font-size:clamp(28px,3.2vw,48px);line-height:1.12;letter-spacing:-.02em;text-align:center;margin-bottom:24px}
+    \\.slide h3{font-family:'DM Serif Display',Georgia,serif;font-size:clamp(18px,2vw,28px);line-height:1.15;letter-spacing:-.01em;margin-bottom:12px}
+    \\.slide p{font-size:clamp(14px,1.5vw,19px);color:var(--muted);line-height:1.65;text-align:center;max-width:760px}
+    \\.ac{color:var(--accent2)}.bl{color:var(--blue)}.gr{color:var(--green)}.pu{color:var(--purple)}.rd{color:var(--red)}.dm{color:var(--muted)}.wh{color:var(--text)}
+    \\em{font-style:italic}strong{color:var(--text);font-weight:600}
+    \\code{font-family:'JetBrains Mono',monospace;font-size:.85em;background:var(--bg3);border:1px solid var(--border);border-radius:5px;padding:2px 7px}
+    \\.tag{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent2);margin-bottom:18px;padding:5px 14px;border:1px solid rgba(192,69,30,.3);border-radius:20px}
+    \\.author{margin-top:36px;font-size:14px;color:var(--muted);display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center}
+    \\.dot{width:4px;height:4px;border-radius:50%;background:var(--accent)}
+    \\.g2{display:grid;grid-template-columns:1fr 1fr;gap:20px;width:100%;max-width:940px}
+    \\.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;width:100%;max-width:1040px}
+    \\.g4{display:grid;grid-template-columns:1fr 1fr;gap:14px;width:100%;max-width:840px}
+    \\.card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:22px;text-align:left}
+    \\.card .nm{font-size:10px;font-weight:700;color:var(--accent2);letter-spacing:.1em;margin-bottom:8px}
+    \\.card h3{font-size:17px;margin-bottom:6px}.card p{font-size:13px;text-align:left;line-height:1.55}
+    \\.flow{display:flex;align-items:center;gap:12px;margin:14px 0;flex-wrap:wrap;justify-content:center}
+    \\.fb{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:12px 20px;text-align:center;font-size:13px;font-weight:500}
+    \\.fb.hl{border-color:var(--accent);background:rgba(212,98,42,.08)}
+    \\.fa{color:var(--muted);font-size:16px}
+    \\.sl{list-style:none;text-align:left;max-width:700px;width:100%}
+    \\.sl li{font-size:clamp(14px,1.4vw,18px);padding:10px 0;border-bottom:1px solid var(--border);display:flex;align-items:baseline;gap:12px}
+    \\.sl li:last-child{border-bottom:none}
+    \\.bu{color:var(--accent2);font-weight:700;flex-shrink:0}
+    \\.tg{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;max-width:860px}
+    \\.tt{font-size:11px;font-weight:500;font-family:'JetBrains Mono',monospace;padding:5px 12px;border-radius:14px;background:var(--bg3);border:1px solid var(--border)}
+    \\.tt.ta{border-color:var(--accent);color:var(--accent2)}.tt.tb{border-color:var(--green);color:var(--green)}.tt.tc{border-color:var(--blue);color:var(--blue)}.tt.tp{border-color:var(--purple);color:var(--purple)}
+    \\.vs{display:flex;align-items:stretch;gap:20px;max-width:860px;width:100%}
+    \\.vc{flex:1;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:22px}
+    \\.vc.hl{border-color:var(--accent)}.vc h3{text-align:center;margin-bottom:12px;font-size:17px}
+    \\.vc ul{list-style:none}.vc li{font-size:13px;padding:5px 0;color:var(--muted)}
+    \\.vd{display:flex;align-items:center;font-size:20px;font-weight:700;color:var(--border)}
+    \\.ss{background:radial-gradient(ellipse at 50% 50%,#ede8f5 0%,var(--bg) 70%)}
+    \\.sn{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent2);margin-bottom:14px}
+    \\.fs{background:radial-gradient(ellipse at 50% 40%,#ede8f5 0%,var(--bg) 70%)}
+    \\.fl{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap;justify-content:center}
+    \\.fk{font-size:13px;padding:10px 20px;border-radius:8px;background:var(--bg3);border:1px solid var(--border);color:var(--muted);transition:all .15s;text-decoration:none}
+    \\.fk:hover{color:var(--text);border-color:var(--accent)}.fk.pri{background:var(--accent);border-color:var(--accent);color:#fff}
+    \\.pbar{position:fixed;bottom:0;left:0;height:3px;background:var(--accent);transition:width .3s ease;z-index:50}
+    \\.snum{position:fixed;bottom:12px;right:18px;font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;z-index:50}
+    \\.nh{position:fixed;bottom:12px;left:18px;font-size:10px;color:var(--border);font-family:'JetBrains Mono',monospace;z-index:50}
+    \\.meter{width:100%;max-width:480px;margin:6px 0}
+    \\.mr{display:flex;align-items:center;gap:10px;margin:8px 0}
+    \\.ml{font-size:12px;color:var(--muted);width:150px;text-align:right;flex-shrink:0}
+    \\.mb{flex:1;height:26px;background:var(--bg3);border-radius:5px;overflow:hidden}
+    \\.mf{height:100%;border-radius:5px;display:flex;align-items:center;padding:0 9px;font-size:10px;font-weight:600;color:#fff}
+    \\.mf.hi{background:var(--red)}.mf.md{background:var(--accent)}.mf.lo{background:var(--green);opacity:.7}
+    \\.stat-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin:16px 0}
+    \\.stat{text-align:center;padding:16px 24px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;min-width:140px}
+    \\.stat .num{font-family:'DM Serif Display',Georgia,serif;font-size:clamp(28px,3vw,42px);color:var(--accent2);line-height:1}
+    \\.stat .lbl{font-size:11px;color:var(--muted);margin-top:6px}
+    \\.demo-slide{background:radial-gradient(ellipse at 50% 40%,#ede8f5 0%,var(--bg) 70%)}
+    \\.demo-badge{font-size:clamp(48px,6vw,80px);font-family:'DM Serif Display',Georgia,serif;color:var(--accent2);margin-bottom:16px}
+    \\.gh-card{max-width:600px;width:100%;text-align:center;padding:32px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;margin:16px 0}
+    \\.gh-card h3{font-size:28px;margin-bottom:12px}
+    \\.gh-card .gh-avatar{width:80px;height:80px;border-radius:50%;background:var(--bg3);border:2px solid var(--border);margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-size:32px;font-family:'DM Serif Display',Georgia,serif;color:var(--accent2)}
+    \\.qr-row{display:flex;gap:28px;margin-top:24px;flex-wrap:wrap;justify-content:center}
+    \\.qr-item{text-align:center}
+    \\.qr-item img{width:140px;height:140px;border-radius:8px;background:#fff;border:1px solid var(--border);padding:6px}
+    \\.qr-item .qr-label{font-size:11px;color:var(--muted);margin-top:6px}
+    \\.cg-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;max-width:700px;width:100%}
+    \\.cg-item{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:8px 4px;text-align:center}
+    \\.cg-item code{font-size:10px;background:none;border:none;padding:0}
+    \\.cg-item .cg-desc{font-size:9px;color:var(--muted);margin-top:3px}
+    \\@media(max-width:768px){.slide{padding:20px 16px}.g2,.g3{grid-template-columns:1fr}.vs{flex-direction:column}.cg-grid{grid-template-columns:repeat(3,1fr)}.flow{flex-direction:column;gap:8px}.flow .fa{transform:rotate(90deg)}.fb{width:100%;max-width:280px}.stat-row{flex-direction:column;align-items:center}.g4{grid-template-columns:1fr}.qr-row{flex-direction:column;align-items:center}}
+    \\</style>
+    \\</head>
+    \\<body>
+    \\<div class="deck" id="deck">
+    \\
+    \\<!-- 1: Title -->
+    \\<div class="slide active" style="background:radial-gradient(ellipse at 50% 30%,#ede8f5 0%,var(--bg) 70%)">
+    \\  <div class="tag">Claude Code Community Meetup</div>
+    \\  <h1>AI Agents<br><span class="ac">&amp; The Path to AGI</span></h1>
+    \\  <p>From Evolutionary Algorithms to Multi-Agent Swarms</p>
+    \\  <div class="author">
+    \\    <span>Rach Pradhan</span>
+    \\    <div class="dot"></div>
+    \\    <span><a href="https://x.com/rachpradhan" target="_blank" style="color:var(--accent2);text-decoration:none">@rachpradhan</a></span>
+    \\    <div class="dot"></div>
+    \\    <span class="dm">March 2026</span>
+    \\  </div>
+    \\</div>
+    \\
+    \\<!-- 2: About Me -->
+    \\<div class="slide">
+    \\  <h2>About <span class="ac">Me</span></h2>
+    \\  <div class="g2">
+    \\    <div class="card">
+    \\      <div class="nm">BUILDER</div>
+    \\      <h3>Rach Pradhan</h3>
+    \\      <p>Researcher &amp; serial builder. Creator of <strong>MerJS</strong> (Zig web framework), <strong>TurboAPI</strong> (7x faster FastAPI), and <strong>NanoBrew</strong> (fastest macOS package manager, 3ms installs).</p>
+    \\      <p style="margin-top:8px"><strong>2x exited founder.</strong></p>
+    \\    </div>
+    \\    <div class="card">
+    \\      <div class="nm">RESEARCH</div>
+    \\      <h3>Credited In</h3>
+    \\      <p><strong>ADAS</strong> (ICLR 2025) &mdash; Automated Design of Agentic Systems. Meta-agents that design better agents.</p>
+    \\      <p style="margin-top:6px"><strong>Omni-EPIC</strong> (ICLR 2025) &mdash; Open-ended AI generating increasingly complex tasks &amp; environments in code.</p>
+    \\    </div>
+    \\  </div>
+    \\  <p style="margin-top:16px">Deeply embedded in the <span class="ac">evolutionary algorithms</span> &amp; <span class="bl">agentic AI</span> space</p>
+    \\</div>
+    \\
+    \\<!-- 3: What Are AI Agents? -->
+    \\<div class="slide">
+    \\  <h2>What <em>is</em> an AI Agent?</h2>
+    \\  <ul class="sl">
+    \\    <li><span class="bu">&rsaquo;</span> An autonomous system that <span class="ac">perceives</span>, <span class="bl">reasons</span>, and <span class="gr">acts</span></li>
+    \\    <li><span class="bu">&rsaquo;</span> Goes beyond chat &mdash; executes multi-step tasks with tools</li>
+    \\    <li><span class="bu">&rsaquo;</span> Maintains context, plans ahead, and adapts to feedback</li>
+    \\    <li><span class="bu">&rsaquo;</span> Think: an intern with <code>sudo</code> access to your codebase</li>
+    \\  </ul>
+    \\  <div class="stat-row" style="margin-top:20px">
+    \\    <div class="stat"><div class="num">$7.6B</div><div class="lbl">AI agent market 2025</div></div>
+    \\    <div class="stat"><div class="num">$47B</div><div class="lbl">Projected by 2030</div></div>
+    \\    <div class="stat"><div class="num">43%</div><div class="lbl">CAGR growth rate</div></div>
+    \\  </div>
+    \\</div>
+    \\
+    \\<!-- 4: Evolution -->
+    \\<div class="slide">
+    \\  <h2>The <span class="ac">Evolution</span></h2>
+    \\  <div class="flow">
+    \\    <div class="fb">Chatbots<br><span class="dm" style="font-size:10px">Pattern matching</span></div>
+    \\    <div class="fa">&rarr;</div>
+    \\    <div class="fb">LLMs<br><span class="dm" style="font-size:10px">Text generation</span></div>
+    \\    <div class="fa">&rarr;</div>
+    \\    <div class="fb">Tool-Using LLMs<br><span class="dm" style="font-size:10px">Function calling</span></div>
+    \\    <div class="fa">&rarr;</div>
+    \\    <div class="fb hl">Agents<br><span class="dm" style="font-size:10px">Autonomous reasoning</span></div>
+    \\  </div>
+    \\  <p style="margin-top:24px">The key shift: from <em>responding</em> to <em>doing</em></p>
+    \\</div>
+    \\
+    \\<!-- 5: Evolutionary Lens -->
+    \\<div class="slide">
+    \\  <h2>An <span class="pu">Evolutionary</span> Lens</h2>
+    \\  <div class="g2">
+    \\    <div class="card">
+    \\      <div class="nm">BIOLOGICAL</div>
+    \\      <h3>Natural Selection</h3>
+    \\      <p>Populations adapt through mutation, crossover, and selection pressure over generations</p>
+    \\    </div>
+    \\    <div class="card">
+    \\      <div class="nm">ARTIFICIAL (ADAS)</div>
+    \\      <h3>Agent Evolution</h3>
+    \\      <p>Meta-agents that iteratively <em>design better agents in code</em> &mdash; outperforming hand-designed systems across coding, science, and math</p>
+    \\    </div>
+    \\  </div>
+    \\  <p style="margin-top:16px">Same principle: <span class="ac">selection pressure drives optimization</span></p>
+    \\</div>
+    \\
+    \\<!-- 6: Section - Opus -->
+    \\<div class="slide ss">
+    \\  <div class="sn">Part II</div>
+    \\  <h1>Claude Opus 4.6<br><span class="ac">Almost AGI?</span></h1>
+    \\  <p>1M context &bull; Extended thinking &bull; Tool use &bull; Multi-turn reasoning</p>
+    \\</div>
+    \\
+    \\<!-- 7: Opus Benchmarks -->
+    \\<div class="slide">
+    \\  <h2>Opus 4.6 <span class="ac">By The Numbers</span></h2>
+    \\  <div class="stat-row">
+    \\    <div class="stat"><div class="num">82.1%</div><div class="lbl">SWE-bench Verified</div></div>
+    \\    <div class="stat"><div class="num">97.8%</div><div class="lbl">HumanEval (coding)</div></div>
+    \\    <div class="stat"><div class="num">91.3%</div><div class="lbl">GPQA Diamond</div></div>
+    \\    <div class="stat"><div class="num">1M</div><div class="lbl">Context tokens</div></div>
+    \\  </div>
+    \\  <div class="stat-row">
+    \\    <div class="stat"><div class="num">65%</div><div class="lbl">Fewer tokens used</div></div>
+    \\    <div class="stat"><div class="num">+144</div><div class="lbl">Elo vs GPT-5.2</div></div>
+    \\    <div class="stat"><div class="num">72.7%</div><div class="lbl">OSWorld (computer use)</div></div>
+    \\  </div>
+    \\  <p style="margin-top:12px;font-size:12px" class="dm">Sources: Anthropic, SWE-bench leaderboard, GPQA benchmark suite</p>
+    \\</div>
+    \\
+    \\<!-- 8: What Opus is Great At -->
+    \\<div class="slide">
+    \\  <h2>What Opus <span class="ac">Excels</span> At</h2>
+    \\  <div class="g3">
+    \\    <div class="card">
+    \\      <div class="nm">AGENTIC CODING</div>
+    \\      <h3 class="bl">Long-Horizon Tasks</h3>
+    \\      <p>Handles complex multi-file refactors autonomously. Reaches peak performance in <strong>4 iterations</strong> where others can't match after 10.</p>
+    \\    </div>
+    \\    <div class="card">
+    \\      <div class="nm">TOOL MASTERY</div>
+    \\      <h3 class="gr">Hundreds of Tools</h3>
+    \\      <p>Tool Search jumps accuracy from 79.5% to <strong>88.1%</strong>. Works across files, terminals, browsers, APIs seamlessly.</p>
+    \\    </div>
+    \\    <div class="card">
+    \\      <div class="nm">DEEP CONTEXT</div>
+    \\      <h3 class="pu">1M Tokens</h3>
+    \\      <p>MRCR v2: <strong>76%</strong> vs Sonnet's 18.5%. Retrieval and reasoning across massive codebases without losing the thread.</p>
+    \\    </div>
+    \\  </div>
+    \\</div>
+    \\
+    \\<!-- 9: Middle Managers Cooked -->
+    \\<div class="slide">
+    \\  <h2>Middle Management is <span class="rd">Cooked</span></h2>
+    \\  <p style="margin-bottom:16px">Coordinate. Delegate. Summarize. Route information. Sound like a job description &mdash; or a prompt?</p>
+    \\  <div class="meter">
+    \\    <div class="mr"><div class="ml">Task delegation</div><div class="mb"><div class="mf hi" style="width:92%">92%</div></div></div>
+    \\    <div class="mr"><div class="ml">Status reporting</div><div class="mb"><div class="mf hi" style="width:95%">95%</div></div></div>
+    \\    <div class="mr"><div class="ml">Code review triage</div><div class="mb"><div class="mf hi" style="width:88%">88%</div></div></div>
+    \\    <div class="mr"><div class="ml">Sprint planning</div><div class="mb"><div class="mf md" style="width:75%">75%</div></div></div>
+    \\    <div class="mr"><div class="ml">People leadership</div><div class="mb"><div class="mf lo" style="width:15%">15%</div></div></div>
+    \\  </div>
+    \\  <p style="margin-top:12px;font-size:13px"><strong>McKinsey:</strong> 57% of U.S. work hours are automatable with current AI</p>
+    \\</div>
+    \\
+    \\<!-- 10: Real Job Impact -->
+    \\<div class="slide">
+    \\  <h2>The <span class="ac">Real</span> Job Impact</h2>
+    \\  <div class="vs">
+    \\    <div class="vc">
+    \\      <h3 class="rd">Cooked</h3>
+    \\      <ul>
+    \\        <li><span class="rd">&times;</span> Ticket shufflers &amp; status reporters</li>
+    \\        <li><span class="rd">&times;</span> Copy-paste code monkeys</li>
+    \\        <li><span class="rd">&times;</span> "Let me sync with the team" middlemen</li>
+    \\        <li><span class="rd">&times;</span> Manual QA on happy paths</li>
+    \\        <li><span class="rd">&times;</span> Meeting schedulers as a career</li>
+    \\      </ul>
+    \\    </div>
+    \\    <div class="vd">vs</div>
+    \\    <div class="vc hl">
+    \\      <h3 class="gr">Thriving</h3>
+    \\      <ul>
+    \\        <li><span class="gr">+</span> System architects &amp; designers</li>
+    \\        <li><span class="gr">+</span> Agent orchestrators (the new 10x)</li>
+    \\        <li><span class="gr">+</span> People leaders with real empathy</li>
+    \\        <li><span class="gr">+</span> Product thinkers &amp; domain experts</li>
+    \\        <li><span class="gr">+</span> <strong>People who build the swarms</strong></li>
+    \\      </ul>
+    \\    </div>
+    \\  </div>
+    \\  <div class="stat-row" style="margin-top:16px">
+    \\    <div class="stat"><div class="num">92M</div><div class="lbl">Jobs displaced by 2030 (WEF)</div></div>
+    \\    <div class="stat"><div class="num">170M</div><div class="lbl">New jobs created (WEF)</div></div>
+    \\    <div class="stat"><div class="num">300M</div><div class="lbl">Jobs exposed (Goldman Sachs)</div></div>
+    \\  </div>
+    \\</div>
+    \\
+    \\<!-- 11: Section - Swarms -->
+    \\<div class="slide ss">
+    \\  <div class="sn">Part III</div>
+    \\  <h1>One Agent is Good.<br><span class="ac">A Swarm is Better.</span></h1>
+    \\  <p>What if you could run 5 Opus-level agents in parallel?</p>
+    \\</div>
+    \\
+    \\<!-- 12: What is a Swarm? -->
+    \\<div class="slide">
+    \\  <h2>What is a <span class="ac">Multi-Agentic Swarm</span>?</h2>
+    \\  <div class="g2">
+    \\    <div class="card">
+    \\      <div class="nm">THE PROBLEM</div>
+    \\      <h3>One Agent, One Thread</h3>
+    \\      <p>A single agent works sequentially. Read file A, then B, then C. For a 50-file refactor, you're waiting <em>forever</em>.</p>
+    \\    </div>
+    \\    <div class="card">
+    \\      <div class="nm">THE SOLUTION</div>
+    \\      <h3>Many Agents, In Parallel</h3>
+    \\      <p>A swarm decomposes the task, assigns pieces to <em>specialized</em> agents running simultaneously, then synthesizes one coherent result.</p>
+    \\    </div>
+    \\  </div>
+    \\  <p style="margin-top:16px">One person painting a house <span class="dm">vs</span> <span class="ac">a coordinated crew finishing it in a day</span></p>
+    \\</div>
+    \\
+    \\<!-- 13: What Does It Mean? -->
+    \\<div class="slide">
+    \\  <h2>What Does This <span class="ac">Actually Mean</span>?</h2>
+    \\  <ul class="sl">
+    \\    <li><span class="bu">1.</span> You say <code>"Find all security vulns and fix them"</code></li>
+    \\    <li><span class="bu">2.</span> An <span class="pu">orchestrator</span> (Opus) breaks it into sub-tasks across your codebase</li>
+    \\    <li><span class="bu">3.</span> Five <span class="bl">worker agents</span> (Sonnet) scan different subsystems <em>in parallel</em></li>
+    \\    <li><span class="bu">4.</span> A <span class="gr">synthesizer</span> combines findings into one clean report + patches</li>
+    \\    <li><span class="bu">5.</span> You review. Merge. <span class="dm">What used to take a sprint takes 10 minutes.</span></li>
+    \\  </ul>
+    \\</div>
+    \\
+    \\<!-- 14: The Orchestration in Detail -->
+    \\<div class="slide">
+    \\  <h2>How <span class="ac">Orchestration</span> Works</h2>
+    \\  <p style="margin-bottom:16px">Opus as the brain. Sonnet as the hands. Haiku as the eyes.</p>
+    \\  <div class="g3">
+    \\    <div class="card">
+    \\      <div class="nm">STEP 1: DECOMPOSE</div>
+    \\      <h3 class="pu">Orchestrator (Opus)</h3>
+    \\      <p>Reads your prompt. Understands the full codebase via CodeGraph. Breaks the task into independent sub-tasks with dependencies.</p>
+    \\    </div>
+    \\    <div class="card">
+    \\      <div class="nm">STEP 2: EXECUTE</div>
+    \\      <h3 class="bl">Workers (Sonnet)</h3>
+    \\      <p>Up to 100 parallel agents, each with a specialized role (finder, fixer, reviewer). Zig threads &mdash; real parallelism, not async.</p>
+    \\    </div>
+    \\    <div class="card">
+    \\      <div class="nm">STEP 3: SYNTHESIZE</div>
+    \\      <h3 class="gr">Synthesizer (Sonnet)</h3>
+    \\      <p>Merges all worker outputs into one coherent result. Resolves conflicts. Generates a unified report or PR.</p>
+    \\    </div>
+    \\  </div>
+    \\  <p style="margin-top:12px;font-size:12px" class="dm">Architecture matters more than agent count &mdash; centralized orchestration contains error amplification to 4.4x vs 17.2x for naive parallelism</p>
+    \\</div>
+    \\
+    \\<!-- 15: DevSwarm Overview -->
+    \\<div class="slide">
+    \\  <h2>Introducing <span class="ac">DevSwarm</span></h2>
+    \\  <ul class="sl">
+    \\    <li><span class="bu">&rsaquo;</span> An <span class="ac">MCP server</span> that turns Claude/Codex into parallel agent swarms</li>
+    \\    <li><span class="bu">&rsaquo;</span> Written in <span class="bl">Zig</span> &mdash; fast, zero dependencies, single binary</li>
+    \\    <li><span class="bu">&rsaquo;</span> <strong>37 tools</strong> for spawning agents, managing tasks, and code intelligence</li>
+    \\    <li><span class="bu">&rsaquo;</span> Works inside your existing workflow &mdash; Claude Code, Codex, Amp</li>
+    \\  </ul>
+    \\</div>
+    \\
+    \\<!-- 16: Swarm Pattern Visual -->
+    \\<div class="slide">
+    \\  <h2>The <span class="ac">Swarm</span> Pattern</h2>
+    \\  <div class="flow" style="margin:16px 0">
+    \\    <div class="fb hl" style="min-width:120px">You<br><span class="dm" style="font-size:10px">"Find all memory leaks"</span></div>
+    \\  </div>
+    \\  <div class="flow" style="margin:3px 0"><div class="fa">&darr;</div></div>
+    \\  <div class="flow" style="margin:3px 0">
+    \\    <div class="fb" style="border-color:var(--purple)"><span class="pu">Orchestrator</span><br><span class="dm" style="font-size:10px">Opus decomposes</span></div>
+    \\  </div>
+    \\  <div class="flow" style="margin:3px 0"><div class="fa">&darr;</div></div>
+    \\  <div class="flow" style="margin:3px 0">
+    \\    <div class="fb"><span class="bl">Worker 1</span></div>
+    \\    <div class="fb"><span class="bl">Worker 2</span></div>
+    \\    <div class="fb"><span class="bl">Worker 3</span></div>
+    \\    <div class="fb"><span class="bl">Worker N</span></div>
+    \\  </div>
+    \\  <div class="flow" style="margin:3px 0"><div class="fa">&darr;</div></div>
+    \\  <div class="flow" style="margin:3px 0">
+    \\    <div class="fb" style="border-color:var(--green)"><span class="gr">Synthesizer</span><br><span class="dm" style="font-size:10px">Combines results</span></div>
+    \\  </div>
+    \\</div>
+    \\
+    \\<!-- 17: 8 Roles -->
+    \\<div class="slide">
+    \\  <h2><span class="ac">8</span> Specialized Roles</h2>
+    \\  <div class="g4">
+    \\    <div class="card" style="padding:12px 16px"><h3 style="font-size:14px"><span class="bl">Finder</span> <span class="dm" style="font-size:10px">Sonnet</span></h3><p style="font-size:11px">Search &amp; locate</p></div>
+    \\    <div class="card" style="padding:12px 16px"><h3 style="font-size:14px"><span class="gr">Reviewer</span> <span class="dm" style="font-size:10px">Sonnet</span></h3><p style="font-size:11px">Read-only review</p></div>
+    \\    <div class="card" style="padding:12px 16px"><h3 style="font-size:14px"><span class="ac">Fixer</span> <span class="dm" style="font-size:10px">Sonnet</span></h3><p style="font-size:11px">Writable edits</p></div>
+    \\    <div class="card" style="padding:12px 16px"><h3 style="font-size:14px"><span class="pu">Explorer</span> <span class="dm" style="font-size:10px">Sonnet</span></h3><p style="font-size:11px">Deep exploration</p></div>
+    \\    <div class="card" style="padding:12px 16px"><h3 style="font-size:14px"><span class="pu">Architect</span> <span class="dm" style="font-size:10px">Opus</span></h3><p style="font-size:11px">System design</p></div>
+    \\    <div class="card" style="padding:12px 16px"><h3 style="font-size:14px"><span class="ac">Orchestrator</span> <span class="dm" style="font-size:10px">Opus</span></h3><p style="font-size:11px">Decompose tasks</p></div>
+    \\    <div class="card" style="padding:12px 16px"><h3 style="font-size:14px"><span class="gr">Synthesizer</span> <span class="dm" style="font-size:10px">Sonnet</span></h3><p style="font-size:11px">Combine outputs</p></div>
+    \\    <div class="card" style="padding:12px 16px"><h3 style="font-size:14px"><span class="dm">Monitor</span> <span class="dm" style="font-size:10px">Haiku</span></h3><p style="font-size:11px">Lightweight checks</p></div>
+    \\  </div>
+    \\</div>
+    \\
+    \\<!-- 18: 37 Tools -->
+    \\<div class="slide">
+    \\  <h2><span class="ac">37</span> MCP Tools</h2>
+    \\  <p style="margin-bottom:20px">One binary. Zero npm. Plugs into Claude Code, Codex, or Amp.</p>
+    \\  <div class="tg">
+    \\    <div class="tt ta">run_swarm</div><div class="tt ta">run_agent</div><div class="tt ta">run_task</div><div class="tt ta">review_fix_loop</div>
+    \\    <div class="tt tp">decompose_feature</div><div class="tt tp">get_next_task</div><div class="tt tp">prioritize_issues</div>
+    \\    <div class="tt tb">create_branch</div><div class="tt tb">create_pr</div><div class="tt tb">merge_pr</div><div class="tt tb">commit_with_context</div>
+    \\    <div class="tt tc">blast_radius</div><div class="tt tc">find_callers</div><div class="tt tc">find_dependents</div><div class="tt tc">relevant_context</div><div class="tt tc">symbol_at</div>
+    \\  </div>
+    \\  <div class="flow" style="margin-top:16px;gap:18px">
+    \\    <span style="font-size:11px"><span class="ac">&bull;</span> Agents</span>
+    \\    <span style="font-size:11px"><span class="pu">&bull;</span> Planning</span>
+    \\    <span style="font-size:11px"><span class="gr">&bull;</span> Git/PR</span>
+    \\    <span style="font-size:11px"><span class="bl">&bull;</span> Code Intel</span>
+    \\  </div>
+    \\</div>
+    \\
+    \\<!-- 19: Review-Fix Loop -->
+    \\<div class="slide">
+    \\  <h2>The <span class="ac">Review-Fix</span> Loop</h2>
+    \\  <p style="margin-bottom:16px">Evolutionary convergence, applied to code</p>
+    \\  <div class="flow">
+    \\    <div class="fb" style="border-color:var(--blue)"><span class="bl">Reviewer</span><br><span class="dm" style="font-size:10px">Read-only</span></div>
+    \\    <div class="fa">&rarr;</div>
+    \\    <div class="fb" style="border-color:var(--accent)"><span class="ac">Fixer</span><br><span class="dm" style="font-size:10px">Patch</span></div>
+    \\    <div class="fa">&rarr;</div>
+    \\    <div class="fb" style="border-color:var(--blue)"><span class="bl">Re-Review</span><br><span class="dm" style="font-size:10px">Verify</span></div>
+    \\    <div class="fa">&rarr;</div>
+    \\    <div class="fb" style="border-color:var(--green)"><span class="gr">Converge</span><br><span class="dm" style="font-size:10px">0 issues</span></div>
+    \\  </div>
+    \\  <p style="margin-top:16px">Repeats up to 5 iterations until the reviewer finds <strong>zero remaining issues</strong></p>
+    \\  <p style="margin-top:6px;font-size:12px" class="dm">Like biological selection: each cycle improves fitness until convergence</p>
+    \\</div>
+    \\
+    \\<!-- 20: GitHub -->
+    \\<div class="slide">
+    \\  <h2>Find Me on <span class="ac">GitHub</span></h2>
+    \\  <div class="gh-card">
+    \\    <div class="gh-avatar">R</div>
+    \\    <h3>@justrach</h3>
+    \\    <p style="text-align:center;margin-bottom:16px">Creator of DevSwarm, MerJS, TurboAPI, NanoBrew &amp; Codegraff</p>
+    \\    <div class="flow" style="gap:8px">
+    \\      <div class="tt ta">DevSwarm</div><div class="tt tc">MerJS</div><div class="tt tp">TurboAPI</div><div class="tt tb">NanoBrew</div><div class="tt ta">Codegraff</div>
+    \\    </div>
+    \\    <p style="margin-top:16px"><a href="https://github.com/justrach" target="_blank" style="color:var(--accent2);text-decoration:underline;font-size:16px">github.com/justrach</a></p>
+    \\  </div>
+    \\</div>
+    \\
+    \\<!-- 21: Codegraff Sidequest -->
+    \\<div class="slide">
+    \\  <div class="tag">Sidequest</div>
+    \\  <h2><span class="ac">Codegraff</span>.com</h2>
+    \\  <p style="margin-bottom:16px">SIMD-accelerated CLI tools that replace Claude Code's built-in file, search, and edit tools. Written in Zig. Zero dependencies. <strong>$99/year</strong> &mdash; includes DevSwarm + CodeDB.</p>
+    \\  <div class="g2">
+    \\    <div style="text-align:left">
+    \\      <div class="cg-grid" style="max-width:100%">
+    \\        <div class="cg-item"><code>zigrep</code><div class="cg-desc">SIMD search</div></div>
+    \\        <div class="cg-item"><code>zigread</code><div class="cg-desc">Structural reader</div></div>
+    \\        <div class="cg-item"><code>zigpatch</code><div class="cg-desc">Atomic patcher</div></div>
+    \\        <div class="cg-item"><code>zigcreate</code><div class="cg-desc">File creator</div></div>
+    \\        <div class="cg-item"><code>zigdiff</code><div class="cg-desc">Git diff + stats</div></div>
+    \\        <div class="cg-item"><code>zigmemo</code><div class="cg-desc">Persistent memory</div></div>
+    \\        <div class="cg-item"><code>zigpar</code><div class="cg-desc">Parallel ops</div></div>
+    \\        <div class="cg-item"><code>zigharness</code><div class="cg-desc">Multi-agent</div></div>
+    \\        <div class="cg-item"><code>muonry</code><div class="cg-desc">MCP daemon</div></div>
+    \\        <div class="cg-item"><code>codedb</code><div class="cg-desc">Code intel DB</div></div>
+    \\      </div>
+    \\    </div>
+    \\    <div style="background:#1e1e2e;border-radius:10px;padding:16px;font-family:'JetBrains Mono',monospace;font-size:11px;line-height:1.8;color:#cdd6f4;overflow:hidden">
+    \\      <div style="color:#6c7086;margin-bottom:8px">$ muonry &mdash; persistent MCP daemon</div>
+    \\      <div><span style="color:#a6e3a1">&check;</span> <span style="color:#a6e3a1">&bull;</span> <span style="color:#a6e3a1">create</span> &nbsp;python/<strong style="color:#cdd6f4">test.py</strong> &nbsp;<span style="color:#89b4fa">&lsaquo; 339.0&micro;s</span></div>
+    \\      <div style="color:#6c7086;font-size:9px">&nbsp; bytes:3024, lines:71</div>
+    \\      <div><span style="color:#a6e3a1">&check;</span> <span style="color:#a6e3a1">&bull;</span> <span style="color:#a6e3a1">create</span> &nbsp;python/<strong style="color:#cdd6f4">pyproject.toml</strong> &nbsp;<span style="color:#89b4fa">&lsaquo; 373.0&micro;s</span></div>
+    \\      <div style="color:#6c7086;font-size:9px">&nbsp; bytes:371, lines:14</div>
+    \\      <div><span style="color:#a6e3a1">&check;</span> <span style="color:#f9e2af">&bull;</span> <span style="color:#f9e2af">patch</span> &nbsp;src/<strong style="color:#cdd6f4">handler.zig</strong> &nbsp;<span style="color:#89b4fa">&lsaquo; 0.7ms</span></div>
+    \\      <div style="color:#6c7086;font-size:9px">&nbsp; L42-58 replaced, 16 lines</div>
+    \\      <div><span style="color:#a6e3a1">&check;</span> <span style="color:#89b4fa">&bull;</span> <span style="color:#89b4fa">outline</span> &nbsp;src/<strong style="color:#cdd6f4">main.zig</strong> &nbsp;<span style="color:#89b4fa">&lsaquo; 245.0&micro;s</span></div>
+    \\      <div style="color:#6c7086;font-size:9px">&nbsp; 12 symbols, 191 tokens (vs 6,826 raw)</div>
+    \\    </div>
+    \\  </div>
+    \\  <div class="stat-row" style="margin-top:16px">
+    \\    <div class="stat"><div class="num">0.7ms</div><div class="lbl">Avg op latency (muonry)</div></div>
+    \\    <div class="stat"><div class="num">260KB</div><div class="lbl">Single binary each</div></div>
+    \\    <div class="stat"><div class="num">0</div><div class="lbl">Dependencies</div></div>
+    \\  </div>
+    \\  <p style="margin-top:10px"><a href="https://codegraff.com" target="_blank" style="color:var(--accent2);text-decoration:underline">codegraff.com</a> &nbsp;<span class="dm">&bull;</span>&nbsp; <span class="dm" style="font-size:12px">If it ever gets open sourced &mdash; everyone gets refunded!</span></p>
+    \\</div>
+    \\
+    \\
+    \\<!-- 22: Token Cost Benchmarks -->
+    \\<div class="slide">
+    \\  <h2><span class="ac">90%</span> Fewer Tokens</h2>
+    \\  <p style="margin-bottom:16px">muonry's structural reads slash token cost vs raw file dumps</p>
+    \\  <table style="border-collapse:collapse;max-width:740px;width:100%;font-size:13px;font-family:'JetBrains Mono',monospace;margin:12px 0">
+    \\    <thead><tr style="border-bottom:2px solid var(--border)">
+    \\      <th style="text-align:left;padding:8px 12px;font-weight:600;color:var(--muted);font-size:11px">Operation</th>
+    \\      <th style="text-align:right;padding:8px 12px;font-weight:600;color:var(--red);font-size:11px">Raw dump</th>
+    \\      <th style="text-align:right;padding:8px 12px;font-weight:600;color:var(--green);font-size:11px">muonry</th>
+    \\      <th style="text-align:right;padding:8px 12px;font-weight:600;color:var(--accent2);font-size:11px">Savings</th>
+    \\    </tr></thead>
+    \\    <tbody>
+    \\      <tr style="border-bottom:1px solid var(--bg3)"><td style="padding:8px 12px">ls dir</td><td style="text-align:right;padding:8px 12px;color:var(--red)">84</td><td style="text-align:right;padding:8px 12px;color:var(--green)">131</td><td style="text-align:right;padding:8px 12px;color:var(--muted)">&mdash;</td></tr>
+    \\      <tr style="border-bottom:1px solid var(--bg3);background:var(--bg2)"><td style="padding:8px 12px"><strong>outline file</strong></td><td style="text-align:right;padding:8px 12px;color:var(--red)">6,826</td><td style="text-align:right;padding:8px 12px;color:var(--green)">191</td><td style="text-align:right;padding:8px 12px;color:var(--accent2)"><strong>97%</strong></td></tr>
+    \\      <tr style="border-bottom:1px solid var(--bg3)"><td style="padding:8px 12px"><strong>symbol read</strong></td><td style="text-align:right;padding:8px 12px;color:var(--red)">6,826</td><td style="text-align:right;padding:8px 12px;color:var(--green)">1,383</td><td style="text-align:right;padding:8px 12px;color:var(--accent2)"><strong>79%</strong></td></tr>
+    \\      <tr style="border-bottom:1px solid var(--bg3);background:var(--bg2)"><td style="padding:8px 12px">search</td><td style="text-align:right;padding:8px 12px">88</td><td style="text-align:right;padding:8px 12px">88</td><td style="text-align:right;padding:8px 12px;color:var(--muted)">0%</td></tr>
+    \\      <tr style="border-bottom:1px solid var(--bg3)"><td style="padding:8px 12px"><strong>edit response</strong></td><td style="text-align:right;padding:8px 12px;color:var(--red)">6,826</td><td style="text-align:right;padding:8px 12px;color:var(--green)">169</td><td style="text-align:right;padding:8px 12px;color:var(--accent2)"><strong>97%</strong></td></tr>
+    \\      <tr style="border-top:2px solid var(--border);font-weight:700"><td style="padding:10px 12px">TOTAL</td><td style="text-align:right;padding:10px 12px;color:var(--red)">20,650</td><td style="text-align:right;padding:10px 12px;color:var(--green)">1,962</td><td style="text-align:right;padding:10px 12px;color:var(--accent2)">90%</td></tr>
+    \\    </tbody>
+    \\  </table>
+    \\  <p style="font-size:12px" class="dm">Typical code-editing workflow: ls &rarr; outline &rarr; symbol read &rarr; search &rarr; edit</p>
+    \\  <p style="font-size:11px;margin-top:6px" class="dm">Raw dump = cat entire file into context. muonry = structural reads (outline, symbol, patch-and-return).</p>
+    \\</div>
+    \\
+    \\<!-- 22: Demo -->
+    \\<div class="slide demo-slide">
+    \\  <div class="demo-badge">DEMO TIME</div>
+    \\  <h1>Let's See It <span class="ac">Live</span></h1>
+    \\  <p>DevSwarm in action &mdash; spawning a multi-agent swarm from Claude Code</p>
+    \\  <div class="flow" style="margin-top:24px">
+    \\    <div class="fb hl">run_swarm</div>
+    \\    <div class="fa">&rarr;</div>
+    \\    <div class="fb">Orchestrate</div>
+    \\    <div class="fa">&rarr;</div>
+    \\    <div class="fb">Parallel workers</div>
+    \\    <div class="fa">&rarr;</div>
+    \\    <div class="fb" style="border-color:var(--green)"><span class="gr">Results</span></div>
+    \\  </div>
+    \\</div>
+    \\
+    \\<!-- 23: Built with merjs -->
+    \\<div class="slide">
+    \\  <h2>These Slides? <span class="ac">MerJS.</span></h2>
+    \\  <p style="margin-bottom:16px">This entire deck is a single <code>.zig</code> file, served by merjs at 115K req/s</p>
+    \\  <div class="g2">
+    \\    <div class="card">
+    \\      <div class="nm">MERJS</div>
+    \\      <h3>Zero Node.js</h3>
+    \\      <p>Next.js-style framework in Zig. File-based routing, SSR, comptime HTML builder. 260KB binary. Zero node_modules.</p>
+    \\    </div>
+    \\    <div class="card">
+    \\      <div class="nm">PERFORMANCE</div>
+    \\      <h3>115K req/s</h3>
+    \\      <p>0.39ms avg latency. &lt;5ms cold start. Vs Next.js: ~2K req/s, ~77ms latency, ~300MB node_modules.</p>
+    \\    </div>
+    \\  </div>
+    \\  <p style="margin-top:12px"><a href="https://github.com/justrach/merjs" target="_blank" style="color:var(--accent2)">github.com/justrach/merjs</a></p>
+    \\</div>
+    \\
+    \\<!-- 24: Thank You + QR -->
+    \\<div class="slide fs">
+    \\  <h1>Thank You<span class="ac">.</span></h1>
+    \\  <p>Questions? Let's talk agents, swarms, and Zig.</p>
+    \\  <div class="qr-row">
+    \\    <div class="qr-item">
+    \\      <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDAiIGhlaWdodD0iMTQwIiB2aWV3Qm94PSIwIDAgMzMgMzMiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyI+PHBhdGggZmlsbD0iI2ZmZmZmZiIgZD0iTTAgMGgzM3YzM0gweiIvPjxwYXRoIHN0cm9rZT0iIzFhMWEyYSIgZD0iTTIgMi41aDdtMiAwaDFtMiAwaDNtMSAwaDFtMiAwaDFtMiAwaDdNMiAzLjVoMW01IDBoMW0xIDBoMW0yIDBoMm0xIDBoN20xIDBoMW01IDBoMU0yIDQuNWgxbTEgMGgzbTEgMGgxbTIgMGgxbTIgMGgzbTMgMGgzbTEgMGgxbTEgMGgzbTEgMGgxTTIgNS41aDFtMSAwaDNtMSAwaDFtNCAwaDRtMyAwaDNtMSAwaDFtMSAwaDNtMSAwaDFNMiA2LjVoMW0xIDBoM20xIDBoMW0xIDBoM20zIDBoMm0zIDBoMW0yIDBoMW0xIDBoM20xIDBoMU0yIDcuNWgxbTUgMGgxbTIgMGgzbTEgMGgxbTEgMGgxbTMgMGgybTEgMGgxbTUgMGgxTTIgOC41aDdtMSAwaDFtMSAwaDFtMSAwaDFtMSAwaDFtMSAwaDFtMSAwaDFtMSAwaDFtMSAwaDdNMTMgOS41aDRtMiAwaDFtMSAwaDJNMiAxMC41aDFtMSAwaDFtMSAwaDFtMSAwaDFtMiAwaDJtMyAwaDFtMiAwaDFtNiAwaDFtMiAwaDFNMyAxMS41aDJtMiAwaDFtMSAwaDFtMiAwaDFtMyAwaDFtMSAwaDJtMiAwaDFtMSAwaDFtMiAwaDFtMiAwaDFNMiAxMi41aDRtMiAwaDFtMyAwaDRtNCAwaDFtMSAwaDNtMSAwaDFtMSAwaDNNMyAxMy41aDJtMiAwaDFtMyAwaDNtMyAwaDFtMSAwaDJtNCAwaDJtMiAwaDFNMiAxNC41aDFtMSAwaDFtMyAwaDFtMiAwaDFtNiAwaDJtMSAwaDRtMiAwaDFtMSAwaDJNMyAxNS41aDRtMyAwaDNtMiAwaDFtMiAwaDJtMiAwaDNtMiAwaDFtMiAwaDFNMyAxNi41aDJtMSAwaDFtMSAwaDJtMSAwaDNtMiAwaDFtMiAwaDJtMyAwaDFtMSAwaDJtMSAwaDJNMiAxNy41aDFtMSAwaDRtMSAwaDJtMSAwaDFtMSAwaDNtMSAwaDNtMSAwaDNtMiAwaDFtMSAwaDFNMyAxOC41aDFtNCAwaDFtMiAwaDFtMSAwaDJtMSAwaDFtMiAwaDFtMSAwaDJtMSAwaDJtMSAwaDFtMSAwaDJNNCAxOS41aDFtNSAwaDJtMSAwaDJtMSAwaDFtMSAwaDFtNCAwaDJtMiAwaDJtMSAwaDFNMiAyMC41aDFtMSAwaDJtMiAwaDJtMyAwaDNtNCAwaDFtMiAwaDFtMSAwaDJtMiAwaDJNMyAyMS41aDJtMSAwaDFtMiAwaDFtMyAwaDFtNSAwaDFtMSAwaDdtMSAwaDFNMiAyMi41aDFtMiAwaDFtMSAwaDJtMyAwaDFtNiAwaDhNMTAgMjMuNWgybTEgMGgzbTIgMGgxbTIgMGgybTMgMGgxbTEgMGgzTTIgMjQuNWg3bTIgMGgxbTEgMGgybTEgMGgxbTEgMGgybTEgMGgybTEgMGgxbTEgMGgybTEgMGgyTTIgMjUuNWgxbTUgMGgxbTQgMGg0bTEgMGgzbTEgMGgxbTMgMGgybTEgMGgxTTIgMjYuNWgxbTEgMGgzbTEgMGgxbTEgMGg1bTEgMGgxbTIgMGgxbTIgMGg1bTIgMGgyTTIgMjcuNWgxbTEgMGgzbTEgMGgxbTIgMGgxbTMgMGgybTEgMGgybTIgMGgxbTIgMGgybTEgMGgzTTIgMjguNWgxbTEgMGgzbTEgMGgxbTEgMGgxbTQgMGgxbTUgMGgxbTMgMGgzbTIgMGgxTTIgMjkuNWgxbTUgMGgxbTIgMGgxbTEgMGgybTIgMGgzbTEgMGgzbTIgMGgxbTIgMGgxTTIgMzAuNWg3bTEgMGgxbTIgMGgybTMgMGgybTEgMGgzbTEgMGgybTIgMGgyIi8+PC9zdmc+Cg==" alt="DevSwarm QR">
+    \\      <div class="qr-label">DevSwarm</div>
+    \\    </div>
+    \\    <div class="qr-item">
+    \\      <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDAiIGhlaWdodD0iMTQwIiB2aWV3Qm94PSIwIDAgMzMgMzMiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyI+PHBhdGggZmlsbD0iI2ZmZmZmZiIgZD0iTTAgMGgzM3YzM0gweiIvPjxwYXRoIHN0cm9rZT0iIzFhMWEyYSIgZD0iTTIgMi41aDdtMiAwaDFtMiAwaDFtMSAwaDFtNCAwaDFtMiAwaDdNMiAzLjVoMW01IDBoMW0xIDBoMm0xIDBoMW0xIDBoMW0zIDBoNG0xIDBoMW01IDBoMU0yIDQuNWgxbTEgMGgzbTEgMGgxbTUgMGgxbTIgMGgxbTIgMGgzbTEgMGgxbTEgMGgzbTEgMGgxTTIgNS41aDFtMSAwaDNtMSAwaDFtMiAwaDFtMyAwaDFtMiAwaDFtMSAwaDNtMSAwaDFtMSAwaDNtMSAwaDFNMiA2LjVoMW0xIDBoM20xIDBoMW0xIDBoMm0zIDBoMW0yIDBoMW0yIDBoMW0yIDBoMW0xIDBoM20xIDBoMU0yIDcuNWgxbTUgMGgxbTMgMGgzbTEgMGgzbTIgMGgybTEgMGgxbTUgMGgxTTIgOC41aDdtMSAwaDFtMSAwaDFtMSAwaDFtMSAwaDFtMSAwaDFtMSAwaDFtMSAwaDFtMSAwaDdNMTIgOS41aDJtMyAwaDFtMSAwaDFtMSAwaDJNMiAxMC41aDFtMSAwaDFtMSAwaDFtMSAwaDFtMyAwaDNtMyAwaDJtNiAwaDFtMiAwaDFNMyAxMS41aDJtMiAwaDFtMSAwaDNtMSAwaDNtMSAwaDNtMiAwaDFtMSAwaDFtMiAwaDFtMiAwaDFNNCAxMi41aDFtMSAwaDRtMSAwaDFtMSAwaDFtMiAwaDNtMSAwaDFtMSAwaDNtMSAwaDFtMSAwaDNNMiAxMy41aDJtMyAwaDFtMiAwaDFtMyAwaDNtMSAwaDNtNCAwaDJtMiAwaDFNMiAxNC41aDJtMyAwaDNtMSAwaDFtMSAwaDJtMSAwaDRtMSAwaDRtMiAwaDFtMSAwaDJNMyAxNS41aDNtMyAwaDNtMSAwaDFtMiAwaDJtMSAwaDFtMiAwaDNtMiAwaDFtMiAwaDFNNCAxNi41aDJtMiAwaDFtMSAwaDZtMyAwaDJtMyAwaDFtMSAwaDJtMSAwaDJNMyAxNy41aDFtMyAwaDFtNCAwaDNtNCAwaDJtMSAwaDNtMiAwaDFtMSAwaDFNNCAxOC41aDFtMiAwaDNtOSAwaDFtMSAwaDJtMSAwaDJtMSAwaDFtMSAwaDJNMyAxOS41aDVtNSAwaDNtMiAwaDFtNCAwaDJtMiAwaDJtMSAwaDFNMiAyMC41aDFtMyAwaDRtMSAwaDJtMyAwaDFtMSAwaDFtMSAwaDFtMiAwaDFtMSAwaDJtMiAwaDJNMyAyMS41aDJtMiAwaDFtMiAwaDNtMSAwaDNtMiAwaDFtMSAwaDdtMSAwaDFNMiAyMi41aDFtMiAwaDFtMiAwaDFtNCAwaDFtMiAwaDExTTEwIDIzLjVoM20zIDBoMW0xIDBoMW0yIDBoMm0zIDBoMW0xIDBoM00yIDI0LjVoN20yIDBoMW0yIDBoMm0yIDBoMm0xIDBoMm0xIDBoMW0xIDBoMm0xIDBoMk0yIDI1LjVoMW01IDBoMW0xMCAwaDJtMSAwaDFtMyAwaDJNMiAyNi41aDFtMSAwaDNtMSAwaDFtMSAwaDFtMyAwaDFtNCAwaDFtMiAwaDVtMyAwaDFNMiAyNy41aDFtMSAwaDNtMSAwaDFtMyAwaDNtMyAwaDFtMyAwaDFtMiAwaDJtMSAwaDNNMiAyOC41aDFtMSAwaDNtMSAwaDFtMSAwaDFtMiAwaDJtNiAwaDFtMyAwaDNtMiAwaDFNMiAyOS41aDFtNSAwaDFtMiAwaDVtMSAwaDdtMiAwaDFtMiAwaDFNMiAzMC41aDdtMSAwaDFtMSAwaDFtMSAwaDFtMSAwaDFtMSAwaDJtMSAwaDNtMSAwaDJtMiAwaDIiLz48L3N2Zz4K" alt="MerJS QR">
+    \\      <div class="qr-label">MerJS</div>
+    \\    </div>
+    \\    <div class="qr-item">
+    \\      <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDAiIGhlaWdodD0iMTQwIiB2aWV3Qm94PSIwIDAgMjkgMjkiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyI+PHBhdGggZmlsbD0iI2ZmZmZmZiIgZD0iTTAgMGgyOXYyOUgweiIvPjxwYXRoIHN0cm9rZT0iIzFhMWEyYSIgZD0iTTIgMi41aDdtMiAwaDFtMyAwaDFtNCAwaDdNMiAzLjVoMW01IDBoMW0zIDBoMm0xIDBoM20yIDBoMW01IDBoMU0yIDQuNWgxbTEgMGgzbTEgMGgxbTEgMGgzbTUgMGgxbTEgMGgxbTEgMGgzbTEgMGgxTTIgNS41aDFtMSAwaDNtMSAwaDFtMSAwaDFtMSAwaDZtMiAwaDFtMSAwaDNtMSAwaDFNMiA2LjVoMW0xIDBoM20xIDBoMW0xIDBoNG00IDBoMW0xIDBoMW0xIDBoM20xIDBoMU0yIDcuNWgxbTUgMGgxbTEgMGgxbTEgMGg0bTEgMGgxbTIgMGgxbTUgMGgxTTIgOC41aDdtMSAwaDFtMSAwaDFtMSAwaDFtMSAwaDFtMSAwaDFtMSAwaDdNMTAgOS41aDRtMiAwaDFtMSAwaDFNMiAxMC41aDFtMSAwaDVtNSAwaDRtMiAwaDVNNSAxMS41aDFtNCAwaDFtMyAwaDJtMiAwaDFtMiAwaDFtMyAwaDFNMiAxMi41aDNtMyAwaDFtMiAwaDJtMSAwaDZtMSAwaDNtMSAwaDJNMiAxMy41aDJtMSAwaDNtMyAwaDFtMSAwaDJtMSAwaDJtMSAwaDFtNiAwaDFNMyAxNC41aDFtNCAwaDFtMiAwaDFtMSAwaDVtMSAwaDJtMSAwaDFtMSAwaDNNMiAxNS41aDFtMTIgMGgxbTIgMGgxbTIgMGgxbTEgMGgxbTEgMGgxTTIgMTYuNWgxbTEgMGgybTIgMGgxbTIgMGgxbTEgMGgybTEgMGgybTEgMGg1bTEgMGgyTTIgMTcuNWgxbTMgMGgxbTMgMGg0bTIgMGgxbTMgMGgzbTMgMGgxTTIgMTguNWgxbTIgMGgxbTEgMGgzbTEgMGgzbTMgMGg2bTEgMGgxTTEwIDE5LjVoMW0xIDBoMW0xIDBoMm0yIDBoMW0zIDBoMk0yIDIwLjVoN20yIDBoMm0yIDBoMm0xIDBoMW0xIDBoMW0xIDBoMW0xIDBoM00yIDIxLjVoMW01IDBoMW0xIDBoM20xIDBoMm0yIDBoMW0zIDBoMm0xIDBoMk0yIDIyLjVoMW0xIDBoM20xIDBoMW0xIDBoMm0yIDBoMW0xIDBoN20xIDBoM00yIDIzLjVoMW0xIDBoM20xIDBoMW0xIDBoMm02IDBoM20xIDBoNU0yIDI0LjVoMW0xIDBoM20xIDBoMW0xIDBoNW04IDBoMm0xIDBoMU0yIDI1LjVoMW01IDBoMW00IDBoMW0yIDBoOG0yIDBoMU0yIDI2LjVoN20xIDBoMW0yIDBoMW01IDBoOCIvPjwvc3ZnPgo=" alt="Codegraff QR">
+    \\      <div class="qr-label">Codegraff</div>
+    \\    </div>
+    \\    <div class="qr-item">
+    \\      <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNDAiIGhlaWdodD0iMTQwIiB2aWV3Qm94PSIwIDAgMzMgMzMiIHNoYXBlLXJlbmRlcmluZz0iY3Jpc3BFZGdlcyI+PHBhdGggZmlsbD0iI2ZmZmZmZiIgZD0iTTAgMGgzM3YzM0gweiIvPjxwYXRoIHN0cm9rZT0iIzFhMWEyYSIgZD0iTTIgMi41aDdtMyAwaDFtMyAwaDFtNCAwaDFtMiAwaDdNMiAzLjVoMW01IDBoMW0xIDBoMW0xIDBoMm0xIDBoMW0zIDBoNG0xIDBoMW01IDBoMU0yIDQuNWgxbTEgMGgzbTEgMGgxbTIgMGgxbTUgMGgxbTIgMGgzbTEgMGgxbTEgMGgzbTEgMGgxTTIgNS41aDFtMSAwaDNtMSAwaDFtMiAwaDNtMSAwaDFtMiAwaDFtMSAwaDNtMSAwaDFtMSAwaDNtMSAwaDFNMiA2LjVoMW0xIDBoM20xIDBoMW0xIDBoMW0xIDBoNG0yIDBoMW0yIDBoMW0yIDBoMW0xIDBoM20xIDBoMU0yIDcuNWgxbTUgMGgxbTIgMGgxbTEgMGgxbTIgMGgzbTIgMGgybTEgMGgxbTUgMGgxTTIgOC41aDdtMSAwaDFtMSAwaDFtMSAwaDFtMSAwaDFtMSAwaDFtMSAwaDFtMSAwaDFtMSAwaDdNMTMgOS41aDJtMiAwaDFtMSAwaDFtMSAwaDJNMiAxMC41aDFtMSAwaDFtMSAwaDFtMSAwaDFtMiAwaDNtNCAwaDJtNiAwaDFtMiAwaDFNMTAgMTEuNWg0bTEgMGgxbTEgMGgzbTIgMGgxbTEgMGgxbTIgMGgxbTIgMGgxTTIgMTIuNWgxbTEgMGg5bTEgMGgxbTEgMGgzbTEgMGgxbTEgMGgzbTEgMGgxbTEgMGgzTTIgMTMuNWgybTIgMGgybTEgMGgxbTUgMGgybTEgMGgzbTQgMGgybTIgMGgxTTIgMTQuNWgybTIgMGgzbTMgMGgzbTEgMGgybTEgMGgxbTEgMGg0bTIgMGgxbTEgMGgyTTIgMTUuNWgxbTIgMGgybTIgMGgxbTEgMGg0bTEgMGgybTEgMGgxbTIgMGgzbTIgMGgxbTIgMGgxTTMgMTYuNWgxbTIgMGgxbTEgMGgybTIgMGgxbTEgMGgybTMgMGgybTMgMGgxbTEgMGgybTEgMGgyTTIgMTcuNWgzbTEgMGgxbTYgMGgxbTMgMGgxbTEgMGgybTEgMGgzbTIgMGgxbTEgMGgxTTQgMTguNWgxbTEgMGg1bTIgMGgxbTQgMGgybTEgMGgybTEgMGgybTEgMGgxbTEgMGgyTTUgMTkuNWgybTMgMGg2bTEgMGgybTQgMGgybTIgMGgybTEgMGgxTTIgMjAuNWgxbTMgMGgzbTEgMGgxbTMgMGgxbTEgMGgzbTEgMGgxbTIgMGgxbTEgMGgybTIgMGgyTTMgMjEuNWgybTEgMGgxbTMgMGg0bTEgMGgybTEgMGgybTEgMGg3bTEgMGgxTTIgMjIuNWgxbTEgMGgybTIgMGgybTEgMGg0bTEgMGgybTIgMGg3TTEwIDIzLjVoMm00IDBoMm0zIDBoMm0zIDBoMW0xIDBoM00yIDI0LjVoN20yIDBoMW0xIDBoM20zIDBoMW0xIDBoMm0xIDBoMW0xIDBoMm0xIDBoMk0yIDI1LjVoMW01IDBoMW04IDBoMW00IDBoMW0zIDBoMm0yIDBoMU0yIDI2LjVoMW0xIDBoM20xIDBoMW0xIDBoMW0yIDBoMW00IDBoMW0zIDBoNU0yIDI3LjVoMW0xIDBoM20xIDBoMW00IDBoMm0yIDBoM20yIDBoMW0yIDBoMm0xIDBoMU0yIDI4LjVoMW0xIDBoM20xIDBoMW0xIDBoNG0zIDBoMm0xIDBoMm0zIDBoM20yIDBoMU0yIDI5LjVoMW01IDBoMW0zIDBoM20zIDBoNm0yIDBoMW0yIDBoMU0yIDMwLjVoN20xIDBoMm0yIDBoMW0xIDBoMm0yIDBoNG0xIDBoMm0yIDBoMiIvPjwvc3ZnPgo=" alt="GitHub QR">
+    \\      <div class="qr-label">@justrach</div>
+    \\    </div>
+    \\  </div>
+    \\  <div class="fl" style="margin-top:20px">
+    \\    <a href="https://github.com/justrach/devswarm" class="fk pri" target="_blank">DevSwarm</a>
+    \\    <a href="https://github.com/justrach/merjs" class="fk" target="_blank">MerJS</a>
+    \\    <a href="https://codegraff.com" class="fk" target="_blank">Codegraff</a>
+    \\    <a href="https://github.com/justrach" class="fk" target="_blank">@justrach</a>
+    \\    <a href="https://x.com/rachpradhan" class="fk" target="_blank">@rachpradhan</a>
+    \\  </div>
+    \\  <div class="author" style="margin-top:28px">
+    \\    <span>Rach Pradhan</span>
+    \\    <div class="dot"></div>
+    \\    <span><a href="https://x.com/rachpradhan" target="_blank" style="color:var(--accent2);text-decoration:none">@rachpradhan</a></span>
+    \\    <div class="dot"></div>
+    \\    <span>Claude Code Community</span>
+    \\    <div class="dot"></div>
+    \\    <span>Slides built with MerJS</span>
+    \\  </div>
+    \\</div>
+    \\
+    \\</div>
+    \\<div class="pbar" id="pbar"></div>
+    \\<div class="snum" id="snum"></div>
+    \\<div class="nh">arrows / space</div>
+    \\<script>
+    \\(function(){
+    \\var S=document.querySelectorAll('.slide'),T=S.length,c=0;
+    \\function go(n){if(n<0||n>=T)return;for(var i=0;i<T;i++)S[i].classList.remove('active');c=n;S[c].classList.add('active');document.getElementById('pbar').style.width=((c+1)/T*100)+'%';document.getElementById('snum').textContent=(c+1)+'/'+T;}
+    \\document.addEventListener('keydown',function(e){if(e.key==='ArrowRight'||e.key===' '||e.key==='ArrowDown'){e.preventDefault();go(c+1);}else if(e.key==='ArrowLeft'||e.key==='ArrowUp'){e.preventDefault();go(c-1);}else if(e.key==='Home'){e.preventDefault();go(0);}else if(e.key==='End'){e.preventDefault();go(T-1);}});
+    \\var tx=0;document.addEventListener('touchstart',function(e){tx=e.touches[0].clientX;},{passive:true});document.addEventListener('touchend',function(e){var d=e.changedTouches[0].clientX-tx;if(Math.abs(d)>50){if(d<0)go(c+1);else go(c-1);}},{passive:true});
+    \\go(0);
+    \\})();
+    \\</script>
+    \\</body>
+    \\</html>
+;
