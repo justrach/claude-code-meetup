@@ -571,7 +571,11 @@ const html =
     \\    <a href="https://github.com/justrach/merjs" class="fk" target="_blank">MerJS</a>
     \\    <a href="https://codegraff.com" class="fk" target="_blank">Codegraff</a>
     \\  </div>
-    \\  <div class="author" style="margin-top:28px">
+    \\  <div style="margin-top:16px;padding:14px 28px;background:rgba(192,69,30,.08);border:2px dashed var(--accent);border-radius:10px;text-align:center">
+    \\    <p style="font-size:13px;color:var(--muted);margin-bottom:4px">First 30 attendees &mdash; use code at <a href="https://codegraff.com" target="_blank" style="color:var(--accent2)">codegraff.com</a></p>
+    \\    <p style="font-size:28px;font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--accent2);letter-spacing:.1em">CLAUDE</p>
+    \\  </div>
+    \\  <div class="author" style="margin-top:20px">
     \\    <span>Rach Pradhan</span>
     \\    <div class="dot"></div>
     \\    <span><a href="https://x.com/rachpradhan" target="_blank" style="color:var(--accent2);text-decoration:none">@rachpradhan</a></span>
