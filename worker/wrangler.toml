@@ -1,0 +1,13 @@
+# slides.codegraff.com — Claude Code Meetup slides
+# Deployed as static Cloudflare Pages-style worker
+
+name = "cc-meetup-slides"
+main = "worker.js"
+compatibility_date = "2024-12-01"
+
+routes = [
+  { pattern = "slides.codegraff.com", custom_domain = true }
+]
+
+[assets]
+directory = "../dist"
