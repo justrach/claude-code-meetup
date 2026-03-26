@@ -471,6 +471,10 @@ const html =
     \\    <div class="stat"><div class="num">0</div><div class="lbl">Dependencies</div></div>
     \\  </div>
     \\  <p style="margin-top:10px"><a href="https://codegraff.com" target="_blank" style="color:var(--accent2);text-decoration:underline">codegraff.com</a> &nbsp;<span class="dm">&bull;</span>&nbsp; <span class="dm" style="font-size:12px">If it ever gets open sourced &mdash; everyone gets refunded!</span></p>
+    \\  <div style="margin-top:16px;padding:14px 28px;background:rgba(192,69,30,.08);border:2px dashed var(--accent);border-radius:10px;text-align:center">
+    \\    <p style="font-size:13px;color:var(--muted);margin-bottom:4px">Promo for attendees &mdash; first 30 people only</p>
+    \\    <p style="font-size:24px;font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--accent2);letter-spacing:.08em">CLAUDE</p>
+    \\  </div>
     \\</div>
     \\
     \\
